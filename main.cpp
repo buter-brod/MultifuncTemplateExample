@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
-
 class WritableBase {
 public:
 
@@ -11,7 +9,7 @@ public:
 
 	virtual WritableBase* Clone() const = 0;
 		
-	virtual ostream& Write(ostream& os) const { return os; };
+	virtual std::ostream& Write(std::ostream& os) const { return os; };
 
 	bool isOwn() const {return _own;}
 
@@ -60,7 +58,7 @@ public:
 		setPtr(nullptr);
 	}
 
-	virtual ostream& Write(ostream& os) const override {
+	virtual std::ostream& Write(std::ostream& os) const override {
 		const T& tRef = *getTPtr();
 		return os << tRef;
 	}
@@ -72,7 +70,7 @@ protected:
 	}
 };
 
-ostream& operator<<(ostream& os, const WritableBase& w) {
+std::ostream& operator<<(std::ostream& os, const WritableBase& w) {
 	return w.Write(os);
 }
 
@@ -137,7 +135,7 @@ public:
 	int _num{0};
 };
 
-ostream& operator<<(ostream& os, const NewStuff& n) {
+std::ostream& operator<<(std::ostream& os, const NewStuff& n) {
 	os << "NewStuff..." << (n._num > 0 ? std::to_string(n._num) : std::string());
 	return os;
 }
